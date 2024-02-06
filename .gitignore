@@ -30,5 +30,5 @@ bin/
 
 ### IDEA ###
 .idea
-.iml
-out
+*.iml
+/out/
