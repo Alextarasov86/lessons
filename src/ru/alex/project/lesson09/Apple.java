@@ -1,4 +1,4 @@
-package ru.alex.project.lesson06.lesson09;
+package ru.alex.project.lesson09;
 
 public class Apple {
     private String color;

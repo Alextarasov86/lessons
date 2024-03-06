@@ -1,7 +1,7 @@
-package ru.alex.project.lesson06;
+package ru.alex.project;
 
-import ru.alex.project.lesson06.books.Author;
-import ru.alex.project.lesson06.books.Book;
+import ru.alex.project.books.Author;
+import ru.alex.project.books.Book;
 
 public class Lesson06 {
     public static void main(String[] args) {

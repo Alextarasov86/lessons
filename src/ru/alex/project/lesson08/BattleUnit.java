@@ -1,4 +1,4 @@
-package ru.alex.project.lesson06.lesson08;
+package ru.alex.project.lesson08;
 
 public class BattleUnit extends Unit{
     private int attackPoint;

@@ -1,4 +1,4 @@
-package ru.alex.project.lesson06.lesson10;
+package ru.alex.project.lesson10;
 
 public class Orange {
     private static Orange orange;

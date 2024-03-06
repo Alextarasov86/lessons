@@ -1,4 +1,4 @@
-package ru.alex.project.lesson06.lesson09.abstr;
+package ru.alex.project.lesson09.abstr;
 
 public class Building implements Colorable{
     public void color(String color){

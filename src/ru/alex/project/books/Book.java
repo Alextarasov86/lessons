@@ -1,4 +1,4 @@
-package ru.alex.project.lesson06.books;
+package ru.alex.project.books;
 
 public class Book {
     private int id;
