@@ -6,9 +6,4 @@ public class Play extends Action{
     public void execute(){
         System.out.println("Play");
     }
-
-    public void nextAction(Action action){
-        this.act = action;
-    }
-
 }

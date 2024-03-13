@@ -6,8 +6,4 @@ public class Drink extends Action{
     public void execute(){
         System.out.println("Drink");
     }
-
-    public void nextAction(Action action){
-        this.act = action;
-    }
 }

@@ -6,9 +6,4 @@ public class Eat extends Action{
     public void execute(){
         System.out.println("Eat");
     }
-
-    @Override
-    public void nextAction(Action action){
-        this.act = action;
-    }
 }
