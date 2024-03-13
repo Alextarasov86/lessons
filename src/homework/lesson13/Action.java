@@ -7,5 +7,11 @@ abstract public class Action {
     public void nextAction(Action action){
         this.act = action;
     }
-//
+
+    public void myAction(){
+        this.execute();
+        if (this.act != null){
+            act.myAction();
+        }
+    }
 }

@@ -2,10 +2,7 @@ package homework.lesson13;
 
 public class Animal {
     public void doAction(Action action){
-        action.execute();
-        if (action.act != null){
-            this.doAction(action.act);
-        }
+       action.myAction();
     }
 
     public static void main(String[] args) {
