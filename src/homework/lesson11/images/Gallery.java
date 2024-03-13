@@ -32,7 +32,6 @@ public class Gallery implements Drawable, Cloneable {
     @Override
     public Gallery clone() throws CloneNotSupportedException {
         Gallery copyGallery = (Gallery) super.clone();
-
         if(this.getName() != null){
             copyGallery.setName(this.getName());
         }
