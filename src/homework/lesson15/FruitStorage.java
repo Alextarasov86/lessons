@@ -3,6 +3,7 @@ package homework.lesson15;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.TreeSet;
 
 // склад содержит информацию о добавленных фруктах+
 public class FruitStorage {
@@ -23,7 +24,7 @@ public class FruitStorage {
         if(toStorageInfo != null){
             if(!fruits.contains(toStorageInfo)){
                 for(int i = 0; i < fruits.size(); i++){
-                    if(fruits.get(i).getType().equals(toStorageInfo.getType()) &&
+                    if(fruits.get(i).getType() == toStorageInfo.getType() &&
                         fruits.get(i).getPrice() == toStorageInfo.getPrice()) {
                             if(numberOfSlots > toStorageInfo.getCount()){
                                 fruits.get(i).updateCount(toStorageInfo.getCount());
@@ -106,5 +107,15 @@ public class FruitStorage {
         }
         // вернуть минимальную цену фрукта с типом fruitType
         return minPrice;
+    }
+
+    public TreeSet<FruitToStorageInfo> sortFruit(FruitsComparators.CountComparator fruitComp){
+        TreeSet<FruitToStorageInfo> treeSet = new TreeSet<>(fruitComp);
+        for (FruitToStorageInfo fruit : fruits) {
+            if(fruit != null){
+                treeSet.add(fruit);
+            }
+        }
+        return treeSet;
     }
 }

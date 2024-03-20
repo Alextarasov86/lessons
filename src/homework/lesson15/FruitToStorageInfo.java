@@ -44,7 +44,7 @@ public class FruitToStorageInfo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FruitToStorageInfo that = (FruitToStorageInfo) o;
-        return Double.compare(that.price, price) == 0 && count == that.count && type.equals(that.type);
+        return Double.compare(that.price, price) == 0 && count == that.count && type == that.type;
     }
 
     @Override
