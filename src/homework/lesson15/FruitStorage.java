@@ -109,13 +109,38 @@ public class FruitStorage {
         return minPrice;
     }
 
-    public TreeSet<FruitToStorageInfo> sortFruit(FruitsComparators.CountComparator fruitComp){
+    public TreeSet<FruitToStorageInfo> sortFruit(ArrayList<FruitToStorageInfo> arrayList,
+                                                        FruitsComparators.CountComparator fruitComp){
         TreeSet<FruitToStorageInfo> treeSet = new TreeSet<>(fruitComp);
-        for (FruitToStorageInfo fruit : fruits) {
+        for (FruitToStorageInfo fruit : arrayList) {
             if(fruit != null){
                 treeSet.add(fruit);
             }
         }
         return treeSet;
+    }
+    public ArrayList<FruitToStorageInfo> sortCount(ArrayList<FruitToStorageInfo> arrayList){
+        arrayList.sort((f1, f2) -> f1.getCount() - f2.getCount());
+        return arrayList;
+    }
+
+    public ArrayList<FruitToStorageInfo> sortType(ArrayList<FruitToStorageInfo> arrayList){
+        arrayList.sort((f1, f2) -> f1.getType().compareTo(f2.getType()));
+        return arrayList;
+    }
+
+    public ArrayList<FruitToStorageInfo> sortPrice(ArrayList<FruitToStorageInfo> arrayList){
+        arrayList.sort((f1, f2) -> (int)(f2.getPrice() - f1.getPrice()));
+        return arrayList;
+    }
+
+    public ArrayList<FruitToStorageInfo> sortCountAndPrice(ArrayList<FruitToStorageInfo> arrayList){
+        arrayList.sort((f1, f2) -> {
+            if(f2.getCount() - f1.getCount() == 0){
+                return (int) (f1.getPrice() - f2.getPrice());
+            }
+            return f2.getCount() - f1.getCount();
+        });
+        return arrayList;
     }
 }

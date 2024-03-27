@@ -18,4 +18,6 @@ public class Lesson18 {
         Function<Integer, String> function = number -> number.toString() + " руб.";
         Predicate<Integer> test = number -> number > 0;
 
+
+
 }}
