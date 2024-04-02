@@ -82,7 +82,7 @@ public class TaskTracker {
         // посмотрите методы teeing() и reducing()
         TasksTrackerStatistic trackerStatistic =new TasksTrackerStatistic();
         List<Task> closedTask = tasks.stream().map(
-                taskToParticipant -> taskToParticipant.getTask()).filter(task -> task.getStatus() == Task.Status.CLOSED).toList();
+                TaskToParticipant::getTask).filter(task -> task.getStatus() == Task.Status.CLOSED).toList();
         trackerStatistic.setNumberOfClosed(closedTask.size());
         Set<Participant> participants = tasks.stream().map(TaskToParticipant::getParticipant).
                 collect(Collectors.toCollection(HashSet::new));
