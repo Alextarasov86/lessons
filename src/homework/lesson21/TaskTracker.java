@@ -42,8 +42,7 @@ public class TaskTracker {
         //                      - задача должна быть просроченной
         // все условия хранятся в TaskPredicate
         for (TaskPredicate predicate : predicates) {
-            tasks = tasks.stream().filter(taskToParticipant -> predicate.check(taskToParticipant.getTask())).
-                    collect(Collectors.toCollection(HashSet::new));
+            taskPredicates = taskPredicates.and(predicate);
         }
         return this;
     }
@@ -59,8 +58,7 @@ public class TaskTracker {
         //                      - у исполнителя еще нет задач
         // все условия хранятся в participantPredicates
         for (ParticipantPredicate predicate : predicates) {
-            tasks = tasks.stream().filter(taskToParticipant -> predicate.check(taskToParticipant.getParticipant())).
-                    collect(Collectors.toCollection(HashSet::new));
+            participantPredicates = participantPredicates.and(predicate);
         }
         return this;
     }
@@ -128,7 +126,7 @@ public class TaskTracker {
 
     // возвращает неизменяемый список задач, прошедших проверку predicate
     public List<Task> filteredTasks(TaskPredicate predicate) {
-        List<Task> list = tasks.stream().map(TaskToParticipant::getTask).filter(predicate::check).toList();
+        List<Task> list = tasks.stream().map(TaskToParticipant::getTask).filter(predicate).toList();
         return null;
     }
 }

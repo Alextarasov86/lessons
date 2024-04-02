@@ -1,5 +1,7 @@
 package homework.lesson21;
 
-public interface ParticipantPredicate {
-    boolean check(Participant participant);
+import java.util.function.Predicate;
+
+public interface ParticipantPredicate extends Predicate<Participant> {
+
 }

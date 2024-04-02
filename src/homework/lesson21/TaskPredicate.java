@@ -2,16 +2,9 @@ package homework.lesson21;
 
 import ru.alex.project.lesson18.Action;
 
+import java.util.function.Predicate;
+
 @FunctionalInterface
-public interface TaskPredicate {
-    boolean check(Task task);
+public interface TaskPredicate extends Predicate<Task> {
 
-    default TaskPredicate and(TaskPredicate next){
-        return task -> {
-            check(task);
-            if(next != null) next.check(task);
-
-            return false;
-        };
-    }
 }
