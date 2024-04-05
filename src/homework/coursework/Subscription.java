@@ -93,6 +93,9 @@ public class Subscription {
             this.timeEnd = timeEnd;
         }
 
+        public LocalTime getTimeEnd() {
+            return timeEnd;
+        }
     }
     public enum Zone {
         GYM, POOL, GROUP;

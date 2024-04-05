@@ -25,35 +25,21 @@ public class Fitness {
         System.out.println(LocalDateTime.now());
     }
 
-    private void add(Subscription subscription, Subscription.Zone zone){
-        if(zone == Subscription.Zone.GYM){
-            for(int i =0; i < gym.length; i++){
-                if(gym[i] == null){
-                    gym[i] = subscription;
+    private void add(Subscription subscription, Subscription[] zone){
+        for(int i =0; i < zone.length; i++){
+            if(zone[i] == null){
+                zone[i] = subscription;
+                if(Arrays.equals(zone, gym)){
                     countGym++;
-                    showInfo(subscription);
-                    break;
                 }
-            }
-        }
-        else if(zone == Subscription.Zone.POOL){
-            for(int i =0; i < pool.length; i++){
-                if(pool[i] == null){
-                    pool[i] = subscription;
+                else if(Arrays.equals(zone, pool)){
                     countPool++;
-                    showInfo(subscription);
-                    break;
                 }
-            }
-        }
-        else if(zone == Subscription.Zone.GROUP){
-            for(int i = 0; i < group.length; i++){
-                if(group[i] == null){
-                    group[i] = subscription;
+                else if(Arrays.equals(zone, group)){
                     countGroup++;
-                    showInfo(subscription);
-                    break;
                 }
+                showInfo(subscription);
+                break;
             }
         }
     }
@@ -63,13 +49,13 @@ public class Fitness {
             if(countGym < 20){
                 if(!LocalDate.now().isAfter(subscription.getDateEnd())){
                     if(subscription.getSubType() == Subscription.SubType.DAY){
-                        if(LocalTime.now().getHour() < 16){
-                            add(subscription, Subscription.Zone.GYM);
+                        if(LocalTime.now().getHour() < subscription.getSubType().getTimeEnd().getHour()){
+                            add(subscription, gym);
                         } else {
                             System.out.println("Вы можете посещать тренажерный зал только до 16 часов");
                         }
                     } else{
-                        add(subscription, Subscription.Zone.GYM);
+                        add(subscription, gym);
                     }
                 } else {
                     System.out.println("Ваш абонемент прострочен");
@@ -84,7 +70,7 @@ public class Fitness {
             }
             else if(countPool < 20){
                 if(!LocalDate.now().isAfter(subscription.getDateEnd())){
-                    add(subscription, Subscription.Zone.POOL);
+                    add(subscription, pool);
                 } else {
                     System.out.println("Ваш абонемент прострочен");
                 }
@@ -99,13 +85,13 @@ public class Fitness {
             else if(countGroup < 20){
                 if(!LocalDate.now().isAfter(subscription.getDateEnd())){
                     if(subscription.getSubType() == Subscription.SubType.DAY){
-                        if(LocalTime.now().getHour() < 16){
-                            add(subscription, Subscription.Zone.GROUP);
+                        if(LocalTime.now().getHour() < subscription.getSubType().getTimeEnd().getHour()){
+                            add(subscription, group);
                         } else {
                             System.out.println("Вы можете посещать групповые занятия только до 16 часов");
                         }
                     } else {
-                        add(subscription, Subscription.Zone.GROUP);
+                        add(subscription, group);
                     }
                 } else {
                     System.out.println("Ваш абонемент прострочен");
