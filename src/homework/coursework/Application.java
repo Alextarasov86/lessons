@@ -24,11 +24,11 @@ public class Application {
 
         Fitness fitness = new Fitness();
         fitness.createGroups(20);
-        fitness.addSubscription(Fitness.Zone.GROUP, subscription5);
-        fitness.addSubscription(Fitness.Zone.GYM, subscription1);
-        fitness.addSubscription(Fitness.Zone.POOL, subscription6);
-        fitness.addSubscription(Fitness.Zone.POOL, subscription2);
-        fitness.addSubscription(Fitness.Zone.GYM, subscription3);
+        fitness.addSubscription(Subscription.Zone.GROUP, subscription5);
+        fitness.addSubscription(Subscription.Zone.GYM, subscription1);
+        fitness.addSubscription(Subscription.Zone.POOL, subscription6);
+        fitness.addSubscription(Subscription.Zone.POOL, subscription2);
+        fitness.addSubscription(Subscription.Zone.GYM, subscription3);
 
         fitness.currentSubscriptionsInfo();
     }

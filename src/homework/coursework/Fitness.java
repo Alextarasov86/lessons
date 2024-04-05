@@ -13,10 +13,6 @@ public class Fitness {
     private int countPool = 0;
     private int countGroup = 0;
 
-    public enum Zone {
-        GYM, POOL, GROUP;
-    }
-
     public void createGroups(int size){
         this.gym = new Subscription[size];
         this.pool = new Subscription[size];
@@ -29,51 +25,51 @@ public class Fitness {
         System.out.println(LocalDateTime.now());
     }
 
-    private void addGym(Subscription subscription){
-        for(int i =0; i < gym.length; i++){
-            if(gym[i] == null){
-                gym[i] = subscription;
-                countGym++;
-                showInfo(subscription);
-                break;
+    private void add(Subscription subscription, Subscription.Zone zone){
+        if(zone == Subscription.Zone.GYM){
+            for(int i =0; i < gym.length; i++){
+                if(gym[i] == null){
+                    gym[i] = subscription;
+                    countGym++;
+                    showInfo(subscription);
+                    break;
+                }
+            }
+        }
+        else if(zone == Subscription.Zone.POOL){
+            for(int i =0; i < pool.length; i++){
+                if(pool[i] == null){
+                    pool[i] = subscription;
+                    countPool++;
+                    showInfo(subscription);
+                    break;
+                }
+            }
+        }
+        else if(zone == Subscription.Zone.GROUP){
+            for(int i = 0; i < group.length; i++){
+                if(group[i] == null){
+                    group[i] = subscription;
+                    countGroup++;
+                    showInfo(subscription);
+                    break;
+                }
             }
         }
     }
 
-    private void addPool(Subscription subscription){
-        for(int i =0; i < pool.length; i++){
-            if(pool[i] == null){
-                pool[i] = subscription;
-                countPool++;
-                showInfo(subscription);
-                break;
-            }
-        }
-    }
-
-    private void addGroup(Subscription subscription){
-        for(int i = 0; i < group.length; i++){
-            if(group[i] == null){
-                group[i] = subscription;
-                countGroup++;
-                showInfo(subscription);
-                break;
-            }
-        }
-    }
-
-    public void addSubscription(Zone zone, Subscription subscription){
-        if(zone == Zone.GYM){
+    public void addSubscription(Subscription.Zone zone, Subscription subscription){
+        if(zone == Subscription.Zone.GYM){
             if(countGym < 20){
                 if(!LocalDate.now().isAfter(subscription.getDateEnd())){
                     if(subscription.getSubType() == Subscription.SubType.DAY){
                         if(LocalTime.now().getHour() < 16){
-                            addGym(subscription);
+                            add(subscription, Subscription.Zone.GYM);
                         } else {
                             System.out.println("Вы можете посещать тренажерный зал только до 16 часов");
                         }
                     } else{
-                        addGym(subscription);
+                        add(subscription, Subscription.Zone.GYM);
                     }
                 } else {
                     System.out.println("Ваш абонемент прострочен");
@@ -82,13 +78,13 @@ public class Fitness {
                 System.out.println("Тренажерный зал переполнен");
             }
         }
-        else if (zone == Zone.POOL){
+        else if (zone == Subscription.Zone.POOL){
             if(subscription.getSubType() == Subscription.SubType.DAY){
                 System.out.println("Вы не можете посещать бассейн");
             }
             else if(countPool < 20){
                 if(!LocalDate.now().isAfter(subscription.getDateEnd())){
-                    addPool(subscription);
+                    add(subscription, Subscription.Zone.POOL);
                 } else {
                     System.out.println("Ваш абонемент прострочен");
                 }
@@ -96,7 +92,7 @@ public class Fitness {
                 System.out.println("Тренажерный зал переполнен");
             }
         }
-        else if(zone == Zone.GROUP){
+        else if(zone == Subscription.Zone.GROUP){
             if(subscription.getSubType() == Subscription.SubType.ONETIME){
                 System.out.println("Вы не можете посещать групповые занятия");
             }
@@ -104,12 +100,12 @@ public class Fitness {
                 if(!LocalDate.now().isAfter(subscription.getDateEnd())){
                     if(subscription.getSubType() == Subscription.SubType.DAY){
                         if(LocalTime.now().getHour() < 16){
-                            addGroup(subscription);
+                            add(subscription, Subscription.Zone.GROUP);
                         } else {
                             System.out.println("Вы можете посещать групповые занятия только до 16 часов");
                         }
                     } else {
-                        addGroup(subscription);
+                        add(subscription, Subscription.Zone.GROUP);
                     }
                 } else {
                     System.out.println("Ваш абонемент прострочен");

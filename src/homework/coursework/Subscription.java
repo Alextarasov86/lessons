@@ -1,6 +1,8 @@
 package homework.coursework;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Subscription {
     private int number;
@@ -78,6 +80,21 @@ public class Subscription {
     }
 
     public enum SubType {
-        ONETIME, DAY, FULL;
+        ONETIME(new Zone[]{Zone.GYM, Zone.POOL}, LocalTime.of(8, 0, 0), LocalTime.of(22, 0, 0)),
+        DAY(new Zone[]{Zone.GYM, Zone.GROUP}, LocalTime.of(8, 0, 0), LocalTime.of(16, 0, 0)),
+        FULL(new Zone[]{Zone.GYM, Zone.POOL, Zone.GROUP}, LocalTime.of(8, 0, 0), LocalTime.of(22, 0, 0));
+        private Zone[] zones;
+        private LocalTime timeStart;
+        private LocalTime timeEnd;
+
+        SubType(Zone[] zones, LocalTime timeStart, LocalTime timeEnd){
+            this.zones = zones;
+            this.timeStart = timeStart;
+            this.timeEnd = timeEnd;
+        }
+
+    }
+    public enum Zone {
+        GYM, POOL, GROUP;
     }
 }
