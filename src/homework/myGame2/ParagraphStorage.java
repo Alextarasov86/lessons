@@ -1,0 +1,71 @@
+package homework.myGame2;
+
+import ru.alex.project.lesson23.taskApple.Apple;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class ParagraphStorage {
+    List<Paragraph> paragraphList = new ArrayList<>();
+    String text1 = "Каждое утро Лисёнок просыпался, завтракал и шёл увидеться с Бельчонком."+
+            "Это утро не было исключением. Лисёнок пришёл на их обычное место встречи," +
+            "но Бельчонка там не было. Лисёнок ждал, ждал, но так и не смог дождаться своего друга." +
+            "\"Бельчонок не пропустил еще ни одной встречи, вдруг он попал в беду.\"" +
+            "- подумал Лисёнок. Как поступить Лисенку?";
+    String choice = "1. Вернуться домой" +
+            "2. Отправиться на поиски";
+    Paragraph paragraph1 = new Paragraph(1,"Лисенок", text1, choice);
+
+    public static void addApple(Paragraph paragraph) throws IOException {
+
+        String s = paragraph.getId() + ";" + paragraph.getTitle() + ";" + paragraph.getText() + ";" + paragraph.getChoice();
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter("file.txt", true));
+            writer.write(s);
+            writer.newLine();
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Paragraph createParagraphToId(int id) throws IOException {
+        List<String> stringList = Files.readAllLines(Paths.get("file.txt"));
+        Paragraph paragraph = null;
+        for (String s : stringList) {
+            if (s.startsWith(Integer.toString(id))) {
+                String[] strings = s.split(";");
+                System.out.println(Arrays.toString(strings));
+                paragraph = new Paragraph(Integer.parseInt(strings[0]), strings[1], strings[2], strings[3]);
+            }
+        }
+        return paragraph;
+    }
+
+    public static void main(String[] args) throws IOException {
+        String text1 = "Каждое утро Лисёнок просыпался, завтракал и шёл увидеться с Бельчонком." +
+                "Это утро не было исключением. Лисёнок пришёл на их обычное место встречи," +
+                "но Бельчонка там не было. Лисёнок ждал, ждал, но так и не смог дождаться своего друга." +
+                "\"Бельчонок не пропустил еще ни одной встречи, вдруг он попал в беду.\"" +
+                "- подумал Лисёнок. Как поступить Лисенку?";
+        String choice = "1. Вернуться домой" +
+                "2. Отправиться на поиски";
+        String text2 = "Вернувшись домой, Лисёнок нашёл там Бельчонка. Оказалось, что Бельчонок пришёл" +
+                "на место встречи раньше и увидел там рой злобных пчел. Он поспешил предупредить об этом Лисёнка," +
+                "но они разминулись. Наконец-то друзья нашли друг друга! Игра завершилась успехом";
+        Paragraph paragraph2 = new Paragraph(1, "Вернуться домой", text2, "2");
+        Paragraph paragraph1 = new Paragraph(2,"Лисенок", text1, choice);
+//        addApple(paragraph2);
+
+
+        Paragraph paragraph = createParagraphToId(2);
+        System.out.println(paragraph.toString());
+    }
+}
