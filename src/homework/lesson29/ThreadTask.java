@@ -51,10 +51,13 @@ public class ThreadTask{
             Set<String> set = new HashSet<>(stringList);
 
             ArrayList<String> stringUniqueList = new ArrayList<>(set);
-            for(int i =0; i < numberOfThreads; i++){
-                SupportThread supportThread = new SupportThread(stringUniqueList);
-                supportThread.start();
-                supportThread.join();
+            List<SupportThread> supportThreadList = new ArrayList<>();
+            for(int i = 0; i < numberOfThreads; i++){
+                supportThreadList.add(new SupportThread(stringUniqueList));
+            }
+            for(int i =0; i < supportThreadList.size(); i++){
+               supportThreadList.get(i).start();
+               supportThreadList.get(i).join();
             }
             Iterator<Map.Entry<String, Long>> iterator = sortByValue(stringLongMap).entrySet().iterator();
             int c = 0;
@@ -98,6 +101,5 @@ public class ThreadTask{
     public static void main(String[] args) {
         ThreadTask threadTask = new ThreadTask("file.txt");
         threadTask.findTopWords();
-
     }
 }
