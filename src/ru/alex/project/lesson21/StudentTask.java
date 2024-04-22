@@ -57,7 +57,7 @@ public class StudentTask {
         Comparator<Student> byName = (s1, s2) -> s1.getName().compareTo(s2.getName());
         Comparator<Student> byNameReverse = byName.reversed();
         Comparator<Student> comparator = bySex.thenComparing(byBirth).thenComparing(byNameReverse);
-        Collections.sort(students, comparator); // Вариант 1
+        students.sort(comparator); // Вариант 1
         students.stream().sorted(comparator); // Вариант2
 
         // 6. Вывести в консоль всех учеников в возрасте от N до M лет

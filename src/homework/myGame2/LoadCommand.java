@@ -1,14 +1,14 @@
 package homework.myGame2;
 
 public class LoadCommand implements Command{
-    Menu menu;
+    Game game;
 
-    public LoadCommand(Menu menu) {
-        this.menu = menu;
+    public LoadCommand(Game game) {
+        this.game = game;
     }
 
     @Override
     public void execute() {
-        menu.load();
+        game.load();
     }
 }

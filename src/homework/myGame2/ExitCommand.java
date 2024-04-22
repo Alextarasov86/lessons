@@ -1,14 +1,14 @@
 package homework.myGame2;
 
 public class ExitCommand implements Command{
-    Menu menu;
+    Game game;
 
-    public ExitCommand(Menu menu) {
-        this.menu = menu;
+    public ExitCommand(Game game) {
+        this.game = game;
     }
 
     @Override
     public void execute() {
-        menu.exit();
+        game.exit();
     }
 }

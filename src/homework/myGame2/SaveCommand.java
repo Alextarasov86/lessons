@@ -1,14 +1,16 @@
 package homework.myGame2;
 
-public class SaveCommand implements Command{
-    Menu menu;
+import java.io.IOException;
 
-    public SaveCommand(Menu menu) {
-        this.menu = menu;
+public class SaveCommand implements Command{
+    Game game;
+
+    public SaveCommand(Game game) {
+        this.game = game;
     }
 
     @Override
-    public void execute() {
-        menu.save();
+    public void execute() throws IOException {
+        game.save();
     }
 }

@@ -1,14 +1,14 @@
 package homework.myGame2;
 
 public class ReturnToGameCommand implements Command{
-    Menu menu;
+    Game game;
 
-    public ReturnToGameCommand(Menu menu) {
-        this.menu = menu;
+    public ReturnToGameCommand(Game game) {
+        this.game = game;
     }
 
     @Override
     public void execute() {
-        menu.returnToGame();
+        game.returnToGame();
     }
 }

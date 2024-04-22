@@ -1,21 +1,17 @@
 package homework.myGame2;
 
 public class Paragraph {
-    private int id;
+
     private String title;
     private String text;
-    private String choice;
-    private int nextParagraphId;
+    private String choice1;
+    private String choice2;
 
-    public Paragraph(int id, String title, String text, String choice) {
-        this.id = id;
+    public Paragraph(String title, String text, String choice1, String choice2) {
         this.title = title;
         this.text = text;
-        this.choice = choice;
-    }
-
-    public int getId() {
-        return id;
+        this.choice1 = choice1;
+        this.choice2 = choice2;
     }
 
     public String getTitle() {
@@ -26,23 +22,37 @@ public class Paragraph {
         return text;
     }
 
-    public String getChoice() {
-        return choice;
+    public String getChoice1() {
+        return choice1;
+    }
+
+    public String getChoice2() {
+        return choice2;
+    }
+
+    public void setChoice1(String choice1) {
+        this.choice1 = choice1;
+    }
+
+    public void setChoice2(String choice2) {
+        this.choice2 = choice2;
     }
 
     public void showParagraph(){
-        System.out.println(getTitle());
-        System.out.println(getText());
-        System.out.println(getChoice());
+        if(!getChoice1().equals("0") && !getChoice2().equals("0")){
+            System.out.println("1. " + getChoice1());
+            System.out.println("2. " + getChoice2());
+            System.out.println("3. Вернуться в главное меню");
+        }
     }
 
     @Override
     public String toString() {
         return "Paragraph{" +
-                "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
-                ", choice='" + choice + '\'' +
+                ", choice1='" + choice1 + '\'' +
+                ", choice2='" + choice2 + '\'' +
                 '}';
     }
 }

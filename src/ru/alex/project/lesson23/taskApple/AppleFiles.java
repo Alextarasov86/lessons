@@ -35,7 +35,7 @@ public class AppleFiles implements Methods<Apple, Long>{
     }
 
     @Override
-    public void addApple(Apple apple) throws IOException {
+    public void addApple(Apple apple) {
 
         String s = apple.id() + " " + apple.color() + " " + apple.weight();
         try{

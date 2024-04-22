@@ -1,14 +1,16 @@
 package homework.myGame2;
 
-public class ReturnToMenuCommand implements Command{
-    Menu menu;
+import java.io.IOException;
 
-    public ReturnToMenuCommand(Menu menu) {
-        this.menu = menu;
+public class ReturnToMenuCommand implements Command{
+    Game game;
+
+    public ReturnToMenuCommand(Game game) {
+        this.game = game;
     }
 
     @Override
-    public void execute() {
-        menu.returnToMenu();
+    public void execute() throws IOException {
+        game.returnToMenu();
     }
 }

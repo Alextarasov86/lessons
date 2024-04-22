@@ -3,14 +3,14 @@ package homework.myGame2;
 import java.io.IOException;
 
 public class StartNewGameCommand implements Command{
-    Menu menu;
+    Game game;
 
-    public StartNewGameCommand(Menu menu) {
-        this.menu = menu;
+    public StartNewGameCommand(Game game) {
+        this.game = game;
     }
 
     @Override
-    public void execute(){
-        menu.startNewGame();
+    public void execute() throws IOException {
+        game.startNewGame();
     }
 }

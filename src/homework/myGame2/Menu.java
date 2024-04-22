@@ -1,60 +1,70 @@
 package homework.myGame2;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
+    private static Command startNewGame;
+    private static Command returnToGame;
+    private static Command save;
+    private static Command load;
+    private static Command exit;
+    private Command returnToMenu;
 
-    Paragraph paragraph;
 
-    public void startNewGame(){
-        String text1 = "Каждое утро Лисёнок просыпался, завтракал и шёл увидеться с Бельчонком."+
-                "Это утро не было исключением. Лисёнок пришёл на их обычное место встречи," +
-                "но Бельчонка там не было. Лисёнок ждал, ждал, но так и не смог дождаться своего друга." +
-                "\"Бельчонок не пропустил еще ни одной встречи, вдруг он попал в беду.\"" +
-                "- подумал Лисёнок. Как поступить Лисенку?";
-        String choice = "1. Вернуться домой " +
-                "2. Отправиться на поиски";
-        paragraph = new Paragraph(1,"Лисенок", text1, choice);
-        paragraph.showParagraph();
+    public Menu(Command startNewGame, Command returnToGame, Command save,
+                Command load, Command exit, Command returnToMenu) {
+        this.startNewGame = startNewGame;
+        this.returnToGame = returnToGame;
+        this.save = save;
+        this.load = load;
+        this.exit = exit;
+        this.returnToMenu = returnToMenu;
+    }
+
+    public static void startNewGame() throws IOException { startNewGame.execute();}
+    public static void returnToGame() throws IOException { returnToGame.execute();}
+    public static void saveGame() throws IOException {save.execute();}
+    public static void loadGame() throws IOException {load.execute();}
+    public static void exitGame() throws IOException {exit.execute();}
+    public void returnToMenuGame() throws IOException {returnToMenu.execute();}
+
+    public static void printMenu() throws IOException {
+        System.out.println("Добро пожаловать в игру. Выберите пункт меню: ");
+        System.out.println("1. Начать игру");
+        System.out.println("2. Вернуться в игру");
+        System.out.println("3. Сохранить игру");
+        if(Game.isSave){
+            System.out.println("4. Загрузить игру");
+            System.out.println("5. Выйти из игры");
+        } else{
+            System.out.println("4. Выйти из игры");
+        }
 
         Scanner scanner = new Scanner(System.in);
         int command;
         command = scanner.nextInt();
-
-    }
-    public void returnToGame(){
-        System.out.println("Вы вернулись в игру");
-    }
-    public void exit(){
-        System.out.println("Выход из игры");
-    }
-    public void save(){
-        System.out.println("Вы сохранили игру");
-    }
-    public void load(){
-        System.out.println("Вы загрузили игру");
-    }
-    public void returnToMenu(){
-        System.out.println("Вы вернулись в главное меню");
-    }
-    public void choice(){
-        System.out.println("Вы сделали выбор");
-    }
-
-    public static Paragraph createParagraphToId(int id) throws IOException {
-        List<String> stringList = Files.readAllLines(Paths.get("file.txt"));
-        Paragraph paragraph = null;
-        for (String s : stringList) {
-            if (s.startsWith(Integer.toString(id))) {
-                String[] strings = s.split(";");
-                System.out.println(Arrays.toString(strings));
-                paragraph = new Paragraph(Integer.parseInt(strings[0]), strings[1], strings[2], strings[3]);
-            }
+        switch (command){
+            case 1:
+                startNewGame();
+            case 2:
+                returnToGame();
+            case 3:
+                saveGame();
+            case 4:
+                if(Game.isSave){
+                    loadGame();
+                } else {
+                    exitGame();
+                }
+            case 5:
+                if(Game.isSave){
+                    exitGame();
+                } else {
+                    System.out.println("Команда не распознана, попробуйте ещё!");
+                }
+            default:
+                System.out.println("Команда не распознана, попробуйте ещё!");
         }
-        return paragraph;
     }
 }
