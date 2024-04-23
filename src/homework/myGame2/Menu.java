@@ -1,5 +1,6 @@
 package homework.myGame2;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -30,15 +31,25 @@ public class Menu {
     public void returnToMenuGame() throws IOException {returnToMenu.execute();}
 
     public static void printMenu() throws IOException {
+        File file = new File("saveGame.txt");
         System.out.println("Добро пожаловать в игру. Выберите пункт меню: ");
         System.out.println("1. Начать игру");
-        System.out.println("2. Вернуться в игру");
-        System.out.println("3. Сохранить игру");
-        if(Game.isSave){
+        if(Game.getParagraph() != null && file.length() != 0) {
+            System.out.println("2. Вернуться в игру");
+            System.out.println("3. Сохранить игру");
             System.out.println("4. Загрузить игру");
             System.out.println("5. Выйти из игры");
-        } else{
+        }
+        else if(Game.getParagraph() == null && file.length() != 0){
+            System.out.println("2. Загрузить игру");
+            System.out.println("3. Выйти из игры");
+        }
+        else if(Game.getParagraph() != null && file.length() == 0){
+            System.out.println("2. Вернуться в игру");
+            System.out.println("3. Сохранить игру");
             System.out.println("4. Выйти из игры");
+        } else {
+            System.out.println("2. Выйти из игры");
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -48,17 +59,28 @@ public class Menu {
             case 1:
                 startNewGame();
             case 2:
-                returnToGame();
+                if(Game.getParagraph() != null){
+                    returnToGame();
+                }
+                else if(file.length() != 0){
+                    loadGame();
+                } else {
+                    exitGame();
+                }
             case 3:
-                saveGame();
+                if(Game.getParagraph() != null){
+                    saveGame();
+                } else {
+                    exitGame();
+                }
             case 4:
-                if(Game.isSave){
+                if(file.length() != 0 && Game.getParagraph() != null){
                     loadGame();
                 } else {
                     exitGame();
                 }
             case 5:
-                if(Game.isSave){
+                if(file.length() != 0 && Game.getParagraph() != null){
                     exitGame();
                 } else {
                     System.out.println("Команда не распознана, попробуйте ещё!");

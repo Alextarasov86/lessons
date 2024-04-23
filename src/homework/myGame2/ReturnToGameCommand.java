@@ -1,5 +1,7 @@
 package homework.myGame2;
 
+import java.io.IOException;
+
 public class ReturnToGameCommand implements Command{
     Game game;
 
@@ -8,7 +10,7 @@ public class ReturnToGameCommand implements Command{
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IOException {
         game.returnToGame();
     }
 }
